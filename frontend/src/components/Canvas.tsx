@@ -45,7 +45,6 @@ export const Canvas: React.FC<ICanvasProps> = ({ squares, setSquares }) => {
     const canvas = canvasRef.current!;
 
     const onDoubleClick = (e: MouseEvent) => {
-      console.log('IN ON DB')
       const size = 100;
       const newSq: TSquare = {
         id: uuidv4(),
@@ -53,7 +52,6 @@ export const Canvas: React.FC<ICanvasProps> = ({ squares, setSquares }) => {
         y: e.offsetY - size / 2,
         size,
       };
-      // отправляем на сервер
       socket.emit(SocketEventTypes.newEvent, {
         type: EventEnum.created,
         payload: newSq,
@@ -110,8 +108,6 @@ export const Canvas: React.FC<ICanvasProps> = ({ squares, setSquares }) => {
   return (
     <canvas
       ref={canvasRef}
-      //   width={2000}
-      //   height={1000}
       style={{ border: "1px solid #ccc" }}
     />
   );
