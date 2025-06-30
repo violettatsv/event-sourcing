@@ -7,8 +7,9 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
 export const socket: Socket = io(process.env.REACT_APP_BACKEND_URL, {
-  path: "/api/socket.io",
-  transports: ["polling"],
+  path: "/socket.io",
+  transports: ['websocket', 'polling'],
+
 });
 
 const root = ReactDOM.createRoot(
