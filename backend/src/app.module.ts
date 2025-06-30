@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import 'dotenv/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { EventsModule } from './modules/events/events.module';
@@ -10,15 +11,14 @@ import { EventsModule } from './modules/events/events.module';
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: process.env.DB_HOST,
-      port: Number(process.env.DB_PORT),
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_DATABASE,
+      url: process.env.DB_URL,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true,
+      synchronize: false,
+      ssl: {
+        rejectUnauthorized: false,
+      },
     }),
-    EventsModule
+    EventsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
